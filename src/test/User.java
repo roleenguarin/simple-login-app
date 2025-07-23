@@ -19,7 +19,7 @@ public class User {
         String sql = "SELECT * FROM Users ORDER BY EMAIL ASC";
         List<User> users = new ArrayList<>();
         
-        try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/LoginDB", "app", "app");
+        try (Connection conn = DriverManager.getConnection("jdbc:derby://localhost:1527/dbname", "username", "password");
                 PreparedStatement ps = conn.prepareStatement(sql);) {
             ResultSet results = ps.executeQuery();
             while (results.next()){
@@ -50,7 +50,7 @@ public class User {
         String deleteString = "DELETE FROM USERS WHERE EMAIL = ?";
         
         try (Connection conn = 
-            DriverManager.getConnection("jdbc:derby://localhost:1527/LoginDB", "app", "app");
+            DriverManager.getConnection("jdbc:derby://localhost:1527/dbname", "username", "password");
             PreparedStatement ps = conn.prepareStatement(deleteString);) {
         ps.setString(1, email);
         ps.executeUpdate();
@@ -62,7 +62,7 @@ public class User {
         String deleteString = "INSERT INTO USERS (EMAIL, PASSWORD, USERROLE) VALUES (?,?,?)";
         
         try (Connection conn = 
-            DriverManager.getConnection("jdbc:derby://localhost:1527/LoginDB", "app", "app");
+            DriverManager.getConnection("jdbc:derby://localhost:1527/dbname", "username", "password");
             PreparedStatement ps = conn.prepareStatement(deleteString);) {
         ps.setString(1, user.email);
         ps.setString(2, user.password);
@@ -75,7 +75,7 @@ public class User {
         String updateString = "UPDATE USERS SET PASSWORD = ?, USERROLE = ? WHERE EMAIL = ?";
         
         try (Connection conn = 
-            DriverManager.getConnection("jdbc:derby://localhost:1527/LoginDB", "app", "app");
+            DriverManager.getConnection("jdbc:derby://localhost:1527/dbname", "username", "password");
             PreparedStatement ps = conn.prepareStatement(updateString);) {
         ps.setString(1, pw);
         ps.setString(2, role);
